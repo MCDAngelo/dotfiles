@@ -1,8 +1,24 @@
+- defaults:
+    link:
+      relink: true
+      force: true
+
 - clean: ['~']
 
+- create:
+  - ~/.config/nvim
+
 - link:
+    ~/.aliases: aliases
+    ~/.gitignore: gitignore
+    ~/.inputrc: inputrc
+    ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
+    ~/Templates: Templates
     ~/.zprofile: zprofile
     ~/.zshrc: zshrc
+    ~/.config/nvim/init.vim: init.vim
+    ~/.vim/: .vim
 
-
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
