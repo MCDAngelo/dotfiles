@@ -38,10 +38,34 @@ set history=1000	    " set commands to save in history, default = 20
 
 " }}}
 
-" MAPPINGS -------------------------------------------------------------- {{{
+" SAVING (WHITESPACE & SPELL CHECK) ------------------------------------- {{{
 
-inoremap jj <esc>       " map jj to the escape key
-nnoremap Y y$           " map Y to yank from cursor to the end of line
+" auto remove whitespace on buffer save
+autocmd! BufWrite * mark ' | silent! %s/\s\+$// | norm ''
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" Turn on spell check for certain filetypes automatically
+autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_us
+autocmd BufRead,BufNewFile *.txt setlocal spell spelllang=en_us
+autocmd FileType gitcommit setlocal spell spelllang=en_us
 
 " }}}
 
+" MAPPINGS -------------------------------------------------------------- {{{
+
+inoremap jj <esc>                       " map jj to the escape key
+nnoremap Y y$                           " map Y to yank from cursor to the end of line
+nmap <C-s> :w!<CR>                      " Works in normal mode, must press Esc first
+imap <C-s> <Esc>:w!<CR>                 " Works in insert mode, saves and puts back in insert mode
+
+
+nmap <Leader><C-r> :so $MYVIMRC<CR>     " easier .vimrc refresh
+nmap <Leader>v :w<CR> :vsp ~/.vimrc<CR> " edit vimrc
+nnoremap <leader>t :stop<CR>            " toggle to full screen terminal - fg to get back
+
+" NERDTree & fzf
+map <C-n> :NERDTreeToggle<CR>
+map <C-f> :Rg<CR>
+map <C-p> :GitFiles<CR>
+
+" }}}
