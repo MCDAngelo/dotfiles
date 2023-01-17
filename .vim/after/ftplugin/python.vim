@@ -5,3 +5,4 @@ setlocal expandtab
 setlocal textwidth=120
 setlocal autoindent
 setlocal fileformat=unix
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
