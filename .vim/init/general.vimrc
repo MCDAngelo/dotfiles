@@ -7,6 +7,7 @@ filetype indent on	   " Load an indent file for the detected file type.
 syntax on		   " Turn syntax highlighting on.
 set backspace=2		   " Backspace behaves like other programs do
 set hidden		   " Undo persists even when switching to different open buffers
+set whichwrap=<,>,h,l
 
 " }}}
 
@@ -41,7 +42,7 @@ set history=1000	    " set commands to save in history, default = 20
 " SAVING (WHITESPACE & SPELL CHECK) ------------------------------------- {{{
 
 " auto remove whitespace on buffer save
-autocmd! BufWrite * mark ' | silent! %s/\s\+$// | norm ''
+"autocmd! BufWrite * mark ' | silent! %s/\s\+$// | norm ''
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " Turn on spell check for certain filetypes automatically
@@ -61,6 +62,8 @@ imap <C-s> <Esc>:w!<CR>                 " Works in insert mode, saves and puts b
 
 nmap <Leader><C-r> :so $MYVIMRC<CR>     " easier .vimrc refresh
 nmap <Leader>v :w<CR> :vsp ~/.vimrc<CR> " edit vimrc
+nmap <Leader>b :w<CR> :vsp ~/.vim/init/general.vimrc<CR>  " edit general vimrc
+file
 nnoremap <leader>t :stop<CR>            " toggle to full screen terminal - fg to get back
 
 " NERDTree & fzf
